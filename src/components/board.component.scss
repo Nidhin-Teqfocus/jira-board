@@ -36,6 +36,37 @@
   text-align: center;
 }
 
+.issue {
+  background: #fff;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  position: relative;
+
+  .issue-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .share-btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: #3f51b5;
+
+      .material-icons {
+        font-size: 20px;
+      }
+
+      &:hover {
+        color: #303f9f;
+      }
+    }
+  }
+}
+
+
 /* Issue list (drop zone) */
 .issue-list {
   min-height: 100px;
@@ -99,4 +130,22 @@ button:hover {
 
 .column button:nth-child(2):hover {
   background-color: #b52a37;
+}
+
+.material-icons {
+  font-size: 15px;
+  align-self: center;
+}
+
+.share-button{
+  margin-top: 5px;
+  background-color: #e0e0e0;
+  width: fit-content;
+  padding: 5px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;  /* Vertically align the items */
+  gap: 5px;  /* Optional: space between text and icon */
+  cursor: pointer;
+  font-size: 10px;
 }

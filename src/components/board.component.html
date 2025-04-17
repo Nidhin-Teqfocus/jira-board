@@ -12,15 +12,18 @@
       (cdkDropListDropped)="drop($event)"
       [id]="column.id"
     >
-      <div
-        *ngFor="let issue of column.issues"
-        class="issue-card"
-        cdkDrag
-      >
+      <div *ngFor="let issue of column.issues" class="issue-card" cdkDrag>
         <div>
-          <strong>{{ issue.title }}</strong><br />
-          <small>{{ issue.description }}</small><br />
-          <small>Created: {{ issue.createdAt | date:'short' }}</small>
+          <strong>{{ issue.title }}</strong
+          ><br />
+          <small>{{ issue.description }}</small
+          ><br />
+          <small>Created: {{ issue.createdAt | date : "short" }}</small
+          ><br />
+          <div class="share-button">
+            Share
+            <span class="material-icons">share</span>
+          </div>
         </div>
         <button (click)="deleteIssue(column.id, issue.id)">x</button>
       </div>
