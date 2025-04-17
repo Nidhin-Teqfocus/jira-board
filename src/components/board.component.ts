@@ -2,20 +2,8 @@ import { CdkDragDrop, DragDropModule, moveItemInArray, transferArrayItem } from 
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { v4 as uuid } from 'uuid';
+import { Column, Issue } from './board.models';
 
-interface Issue {
-  id: string;
-  title: string;
-  description: string;
-  createdAt: number;
-}
-
-interface Column {
-  id: string;
-  title: string;
-  issues: Issue[];
-  createdAt: number;
-}
 
 @Component({
   selector: 'app-board',
