@@ -1,11 +1,12 @@
 /* Base layout */
 :host {
   display: flex;
-  justify-content: center;
-  padding: 2rem;
-  font-family: 'Segoe UI', sans-serif;
+  justify-content: start;
+  padding: 0rem 3rem 3rem 3rem;
+  font-family: "Segoe UI", sans-serif;
   background-color: #f0f2f5;
   min-height: 90vh;
+  min-width: 95vw;
 }
 
 /* Board container */
@@ -13,9 +14,76 @@
   display: flex;
   gap: 2rem;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: start;
   width: 100%;
   max-width: 1200px;
+  min-width: 90vw;
+  min-height: 80vh;
+}
+
+.add-issue-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+
+  input,
+  textarea {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-family: inherit;
+  }
+
+  .form-buttons {
+    display: flex;
+    gap: 8px;
+
+    button {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+
+      &:first-child {
+        background: #4caf50;
+        color: white;
+      }
+
+      &:last-child {
+        background: #f44336;
+        color: white;
+      }
+    }
+  }
+}
+.add-column-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 30px;
+
+  input {
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    min-width: 200px;
+  }
+  button {
+    padding: 8px 16px;
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #1565c0;
+    }
+  }
 }
 
 /* Column styling */
@@ -34,6 +102,21 @@
   margin: 0 0 0.5rem 0;
   font-size: 1.2rem;
   text-align: center;
+}
+
+.column-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px;
+}
+
+.column-header h1{
+  margin-left: 10px;
+}
+
+.add-list-button {
+  height: fit-content;
 }
 
 .issue {
@@ -66,7 +149,6 @@
   }
 }
 
-
 /* Issue list (drop zone) */
 .issue-list {
   min-height: 100px;
@@ -74,8 +156,9 @@
   border: 2px dashed #ccc;
   border-radius: 8px;
   padding: 0.5rem;
-  flex-grow: 1;
+  flex-grow: 0.9;
   margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 /* Individual issue cards */
@@ -137,15 +220,15 @@ button:hover {
   align-self: center;
 }
 
-.share-button{
+.share-button {
   margin-top: 5px;
   background-color: #e0e0e0;
   width: fit-content;
   padding: 5px;
   border-radius: 10px;
   display: flex;
-  align-items: center;  /* Vertically align the items */
-  gap: 5px;  /* Optional: space between text and icon */
+  align-items: center; /* Vertically align the items */
+  gap: 5px; /* Optional: space between text and icon */
   cursor: pointer;
   font-size: 10px;
 }

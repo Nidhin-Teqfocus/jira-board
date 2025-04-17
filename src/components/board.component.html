@@ -1,35 +1,63 @@
-<div class="board">
-  <div class="column" *ngFor="let column of columns">
-    <h3>{{ column.title }}</h3>
-    <button (click)="deleteColumn(column.id)">Delete Column</button>
-    <button (click)="addIssue(column.id)">+ Issue</button>
-
-    <div
-      class="issue-list"
-      cdkDropList
-      [cdkDropListData]="column.issues"
-      [cdkDropListConnectedTo]="connectedDropListsIds"
-      (cdkDropListDropped)="drop($event)"
-      [id]="column.id"
-    >
-      <div *ngFor="let issue of column.issues" class="issue-card" cdkDrag>
-        <div>
-          <strong>{{ issue.title }}</strong
-          ><br />
-          <small>{{ issue.description }}</small
-          ><br />
-          <small>Created: {{ issue.createdAt | date : "short" }}</small
-          ><br />
-          <div class="share-button">
-            Share
-            <span class="material-icons">share</span>
+<div>
+  <div class="column-header">
+    <h1>Project Board</h1>
+    <div class="add-column-form">
+      <input
+        type="text"
+        [(ngModel)]="newColumnTitle"
+        placeholder="List Title"
+      />
+      <button (click)="addColumn()">Add List</button>
+    </div>
+  </div>
+  <div class="board">
+    <div class="column" *ngFor="let column of columns">
+      <div class="column-header">
+        <h3>{{ column.title }}</h3>
+        <button (click)="deleteColumn(column.id)" title="Delete List">X</button>
+      </div>
+      <div
+        class="issue-list"
+        cdkDropList
+        [cdkDropListData]="column.issues"
+        [cdkDropListConnectedTo]="connectedDropListsIds"
+        (cdkDropListDropped)="drop($event)"
+        [id]="column.id"
+      >
+        <div *ngFor="let issue of column.issues" class="issue-card" cdkDrag>
+          <div>
+            <strong>{{ issue.title }}</strong
+            ><br />
+            <small>{{ issue.description }}</small
+            ><br />
+            <small>Created: {{ issue.createdAt | date : "short" }}</small
+            ><br />
+            <div class="share-button">
+              Share
+              <span class="material-icons">share</span>
+            </div>
           </div>
+          <button (click)="deleteIssue(column.id, issue.id)" title="Delete Issue">X</button>
         </div>
-        <button (click)="deleteIssue(column.id, issue.id)">x</button>
+      </div>
+      <div *ngIf="!showIssueForm[column.id]">
+        <button (click)="showIssueForm[column.id] = true">Add Issue</button>
+      </div>
+      <div *ngIf="showIssueForm[column.id]" class="add-issue-form">
+        <input
+          type="text"
+          [(ngModel)]="newIssueTitle[column.id]"
+          placeholder="Issue title"
+        />
+        <textarea
+          [(ngModel)]="newIssueDescription[column.id]"
+          placeholder="Issue description"
+        ></textarea>
+        <div class="form-buttons">
+          <button (click)="addIssue(column.id)">Add</button>
+          <button (click)="showIssueForm[column.id] = false">Cancel</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div>
-  <button (click)="addColumn()">+ Add List</button>
 </div>
