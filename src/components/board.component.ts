@@ -14,6 +14,7 @@ interface Column {
   id: string;
   title: string;
   issues: Issue[];
+  createdAt: number;
 }
 
 @Component({
@@ -34,6 +35,9 @@ export class BoardComponent implements OnInit {
     const saved = localStorage.getItem('boardData');
     if (saved) {
       this.columns = JSON.parse(saved);
+      this.columns.forEach(column => {
+        this.sortIssues(column.id);  // Sort issues when loading data
+      });
     }
   }
 
@@ -44,7 +48,13 @@ export class BoardComponent implements OnInit {
   addColumn() {
     const title = prompt('Column name:');
     if (title) {
-      this.columns.push({ id: uuid(), title, issues: [] });
+      const newColumn: Column = {
+        id: uuid(),
+        title,
+        issues: [],
+        createdAt: Date.now()
+      };
+      this.columns.push(newColumn);
       this.save();
     }
   }
@@ -58,21 +68,25 @@ export class BoardComponent implements OnInit {
     const title = prompt('Issue title:');
     const description = prompt('Issue description:');
     if (title && description !== null) {
-      const col = this.columns.find(c => c.id === columnId);
-      col?.issues.unshift({
-        id: uuid(),
-        title,
-        description,
-        createdAt: Date.now()
-      });
-      this.save();
+      const column = this.columns.find(c => c.id === columnId);
+      if (column) {
+        column.issues.unshift({
+          id: uuid(),
+          title,
+          description,
+          createdAt: Date.now()
+        });
+        this.sortIssues(columnId);  // Sort issues after adding
+        this.save();
+      }
     }
   }
 
   deleteIssue(columnId: string, issueId: string) {
-    const col = this.columns.find(c => c.id === columnId);
-    if (col) {
-      col.issues = col.issues.filter(i => i.id !== issueId);
+    const column = this.columns.find(c => c.id === columnId);
+    if (column) {
+      column.issues = column.issues.filter(i => i.id !== issueId);
+      this.sortIssues(columnId);  // Sort issues after deletion
       this.save();
     }
   }
@@ -88,6 +102,16 @@ export class BoardComponent implements OnInit {
         event.currentIndex
       );
     }
+    this.sortIssues(event.container.id);  // Use the ID of the target container to sort its issues
     this.save();
   }
+
+  // Method to sort issues inside a column by 'createdAt' (reverse chronological)
+  sortIssues(columnId: string) {
+    const column = this.columns.find(c => c.id === columnId);
+    if (column) {
+      column.issues.sort((a, b) => b.createdAt - a.createdAt);
+    }
+  }
+
 }
