@@ -1,0 +1,32 @@
+<div class="board">
+  <div class="column" *ngFor="let column of columns">
+    <h3>{{ column.title }}</h3>
+    <button (click)="deleteColumn(column.id)">Delete Column</button>
+    <button (click)="addIssue(column.id)">+ Issue</button>
+
+    <div
+      class="issue-list"
+      cdkDropList
+      [cdkDropListData]="column.issues"
+      [cdkDropListConnectedTo]="connectedDropListsIds"
+      (cdkDropListDropped)="drop($event)"
+      [id]="column.id"
+    >
+      <div
+        *ngFor="let issue of column.issues"
+        class="issue-card"
+        cdkDrag
+      >
+        <div>
+          <strong>{{ issue.title }}</strong><br />
+          <small>{{ issue.description }}</small><br />
+          <small>Created: {{ issue.createdAt | date:'short' }}</small>
+        </div>
+        <button (click)="deleteIssue(column.id, issue.id)">x</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+  <button (click)="addColumn()">+ Add List</button>
+</div>

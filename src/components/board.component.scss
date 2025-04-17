@@ -1,0 +1,102 @@
+/* Base layout */
+:host {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f0f2f5;
+  min-height: 90vh;
+}
+
+/* Board container */
+.board {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Column styling */
+.column {
+  background: #ffffff;
+  padding: 1rem;
+  width: 280px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Column title */
+.column h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+/* Issue list (drop zone) */
+.issue-list {
+  min-height: 100px;
+  background: #f9f9f9;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  padding: 0.5rem;
+  flex-grow: 1;
+  margin-top: 1rem;
+}
+
+/* Individual issue cards */
+.issue-card {
+  background: #e0f7fa;
+  padding: 0.75rem;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  cursor: grab;
+  position: relative;
+}
+
+/* Button inside issue card */
+.issue-card button {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: #ff5252;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* Buttons */
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  margin: 4px 0;
+  border-radius: 0px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Delete column button */
+.column button:nth-child(2) {
+  background-color: #dc3545;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.column button:nth-child(2):hover {
+  background-color: #b52a37;
+}
